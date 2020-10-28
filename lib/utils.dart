@@ -37,7 +37,7 @@ class JsonSerializableConverter extends JsonConverter {
     // use [JsonConverter] to decode json
     final jsonRes = super.convertResponse(response);
 
-    return jsonRes.replace<ResultType>(body: _decode<Item>(jsonRes.body));
+    return jsonRes.copyWith<ResultType>(body: _decode<Item>(jsonRes.body));
   }
 
   @override
@@ -79,8 +79,9 @@ Future<Request> loggingInterceptors(Request request) async {
 }
 
 Future<Request> authHeader(Request request) async {
-  if (request.url == "login" || request.url == "register")
-    return applyHeader(request, "", "");
+  if (request.url == "login" ||
+      request.url == "register" ||
+      request.url == "Account/TokenGenerate") return request;
 
   var token = await Strings.getUserToken();
   if (token == null)

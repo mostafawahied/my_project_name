@@ -31,6 +31,7 @@ class LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   String username = "Operator1";
   String password = "P@ssw0rd1";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,7 +50,8 @@ class LoginScreenState extends State<LoginScreen> {
                         form.save();
                         await safeRequest(
                           context,
-                          api().login({"username":username,"password":password}),
+                          api().login(
+                              {"username": username, "password": password}),
                           onSuccess: (result) {
                             print(result);
                           },
