@@ -17,10 +17,13 @@ class _$BringiService extends BringiService {
   final definitionType = BringiService;
 
   @override
-  Future<Response<Groups>> login(Map<String, String> fields) {
+  Future<Response<Groups>> login(String username, String password) {
     final $url = 'Account/TokenGenerate';
-    final $body = fields;
-    final $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<Groups, Groups>($request, requestConverter: convertForm);
+    final $headers = {'content-type': 'application/x-www-form-urlencoded'};
+    final $body = <String, String>{'username': username, 'password': password};
+    $body.removeWhere((key, value) => value == null);
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<Groups, Groups>($request);
   }
 }

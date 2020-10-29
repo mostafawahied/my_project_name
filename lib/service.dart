@@ -11,9 +11,6 @@ part "service.chopper2.dart";
 
 const baseUrl = "http://160.153.234.82:5000";
 
-Request convertForm(Request req) =>
-    applyHeader(req, contentTypeKey, formEncodedHeaders);
-
 @ChopperApi()
 abstract class BringiService extends ChopperService {
   static BringiService create([ChopperClient client]) =>
@@ -21,10 +18,13 @@ abstract class BringiService extends ChopperService {
 
 //region user
 
-  @Post(path: "Account/TokenGenerate")
-  @FactoryConverter(request: convertForm)
+  @Post(
+    path: "Account/TokenGenerate",
+    headers: {contentTypeKey: formEncodedHeaders},
+  )
   Future<Response<Groups>> login(
-    @Body() Map<String, String> fields,
+    @Field("username") String username,
+    @Field("password") String password,
   );
 
 // @Post(path: "register")

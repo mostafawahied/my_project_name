@@ -50,8 +50,7 @@ class LoginScreenState extends State<LoginScreen> {
                         form.save();
                         await safeRequest(
                           context,
-                          api().login(
-                              {"username": username, "password": password}),
+                          api().login(username, password),
                           onSuccess: (result) {
                             print(result);
                           },
