@@ -22,4 +22,12 @@ class _$BringiService extends BringiService {
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
+
+  Future<Response<MyAddressResponseModel>> getAdresses() {
+    final $url = 'Customer/CustomerAddresses/English';
+    final $headers = {'content-type': 'application/x-www-form-urlencoded'};
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client
+        .send<MyAddressResponseModel, MyAddressResponseModel>($request);
+  }
 }

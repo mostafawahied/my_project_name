@@ -2,6 +2,7 @@ import "dart:async";
 import 'dart:core';
 
 import 'package:chopper2/chopper2.dart';
+import 'package:my_project_name/MyAddressResponseModel.dart';
 import 'package:my_project_name/gender.dart';
 import 'package:my_project_name/groups.dart';
 //import 'package:flutter_toolbox/flutter_toolbox.dart';
@@ -24,7 +25,7 @@ abstract class BringiService extends ChopperService {
       path: "Account/TokenGenerate",
       headers: {"content-type": "application/x-www-form-urlencoded"})
   Future<Response> login(
-      @Body() Map<String, String> fields,
+    @Body() Map<String, String> fields,
   );
 
   // @Post(path: "register")
@@ -37,6 +38,11 @@ abstract class BringiService extends ChopperService {
   //   @Field("c_password") String c_password,
   // );
 
+  @Get(
+      path: "Customer/CustomerAddresses/English",
+      headers: {"content-type": "application/x-www-form-urlencoded"})
+  Future<Response<MyAddressResponseModel>> getAdresses();
+
 //endregion user
 
 }
@@ -44,6 +50,7 @@ abstract class BringiService extends ChopperService {
 BringiService api() {
   var converter = JsonSerializableConverter({
     LoginResponse: LoginResponse.fromJsonFactory,
+    MyAddressResponseModel: MyAddressResponseModel.fromJsonFactory,
     Groups: Groups.fromJsonFactory,
     Gender: Gender.fromJsonFactory,
     //CreateAccountResponse: CreateAccountResponse.fromJsonFactory,
