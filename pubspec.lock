@@ -126,7 +126,7 @@ packages:
       name: chopper2
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.6"
+    version: "3.0.7"
   chopper2_generator:
     dependency: "direct dev"
     description:

@@ -9,7 +9,7 @@ import 'package:my_project_name/login/model/LoginResponse.dart';
 
 part "service.chopper2.dart";
 
-const baseUrl = "http://160.153.234.82:5000";
+const baseUrl = "https://tutorpal.thepeoplesfund.org.uk";
 
 @ChopperApi()
 abstract class BringiService extends ChopperService {
@@ -19,13 +19,31 @@ abstract class BringiService extends ChopperService {
 //region user
 
   @Post(
-    path: "Account/TokenGenerate",
+    path: "student_view_api/login.php",
     headers: {contentTypeKey: formEncodedHeaders},
   )
-  Future<Response<Groups>> login(
-    @Field("username") String username,
-    @Field("password") String password,
+  Future<Response> login(
+    @Field("school_username") String school_username,
+    @Field("student_username") String student_username,
+    @Field("student_password") String student_password,
   );
+
+  @Post(
+    path: "student_view_api/login.php",
+  )
+  Future<Response<String>> login2(
+    @Field("school_username") String school_username,
+    @Field("student_username") String student_username,
+    @Field("student_password") String student_password,
+  );
+// @Post(
+//   path: "Account/TokenGenerate",
+//   headers: {contentTypeKey: formEncodedHeaders},
+// )
+// Future<Response<Groups>> login(
+//   @Field("username") String username,
+//   @Field("password") String password,
+// );
 
 // @Post(path: "register")
 // Future<Response<CreateAccountResponse>> register(
@@ -51,7 +69,7 @@ BringiService api() {
   });
 
   final chopper = ChopperClient(
-    baseUrl: '$baseUrl/api/',
+    baseUrl: '$baseUrl/',
     services: [BringiService.create()],
     converter: converter,
     errorConverter: converter,
